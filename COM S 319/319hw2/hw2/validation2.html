@@ -1,0 +1,88 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <style>
+        .errorMessage {
+            color: red;
+        }
+    </style>
+    <script src="./validation2.js"></script>
+    <title>Contact Information</title>
+</head>
+
+<body>
+    <form id='myForm' action="validation1.html">
+        <style>
+            table {
+                border-spacing: 0px;
+                table-layout: fixed;
+                width: 700px;
+            }
+
+            td {
+                border: 1px solid #666;
+                word-break: break-all;
+            }
+        </style>
+        <table>
+            <tr>
+                <th><b>FIELD LABEL</b></th>
+                <th><b>Field Type</b></th>
+                <th><b>Validation rule</b></th>
+                <th><b>RESULT</b></th>
+            </tr>
+            <tr>
+                <td style="text-align: center">Email</td>
+                <td>
+                    <label for="email"></label>
+                    <input type="text" id="email" name="email"
+                        style="margin: 0px; width: 100%; height: 100%" /><br /><br />
+                </td>
+                <td style="text-align: center">
+                    <b>*Required.</b><br />Must be in the form<br />xxx@xxx.xxx<br />x should be <br />
+                    alphanumeric (e.g. no<br />special symbols).
+                </td>
+                <td>
+                    <div id="i1"></div>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: center">Phone</td>
+                <td>
+                    <label for="phone"></label>
+                    <input type="text" id="phone" name="phone"
+                        style="margin: 0px; width: 100%; height: 100%" /><br /><br />
+                </td>
+                <td style="text-align: center">
+                    <b>*Required.</b><br />Must be in the form<br />xxx-xxx-xxxx or<br />xxxxxxxxxx.<br />
+                    x should be numeric
+                </td>
+                <td>
+                    <div id="i2"></div>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: center">Address</td>
+                <td>
+                    <label for="address"></label>
+                    <input type="text" id="address" name="address"
+                        style="margin: 0px; width: 100%; height: 100%" /><br /><br />
+                </td>
+                <td style="text-align: center">
+                    <b>*Required.</b><br />Must be in the form of<br />city & state. Example:<br />
+                    Ames,IA
+                </td>
+                <td>
+                    <div id="i3"></div>
+                </td>
+            </tr>
+        </table>
+
+        <br><br>
+        <input onCLick="validate2()" type="button" id="submit" name="submit" value="Submit" />
+
+    </form>
+</body>
+
+</html>

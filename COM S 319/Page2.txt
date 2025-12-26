@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Page 2</h1>
+<h1>Table 1</h1>
+<br>
+Which of the following is not a fruit?
+<br>
+A. <img src="https://pixnio.com/free-images/flora-plants/fruits/strawberries-pictures/strawberry-fruit-406x544.jpg" alt="strawberry image" width="3%"/>&nbsp;&nbsp;
+<INPUT TYPE="radio" NAME="strawberry"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+B. <img src="https://pixnio.com/free-images/2017/11/15/2017-11-15-08-57-55-1200x801.jpg" alt="flower image" width="3%"/>&nbsp;&nbsp;
+<INPUT TYPE="radio" NAME="flower"/> 
+<br>
+C.<img src="https://pixnio.com/free-images/2018/12/08/2018-12-08-16-01-13-1200x900.jpg" alt="banana image" width="3%"/>&nbsp;&nbsp;
+<INPUT TYPE="radio" NAME="banana"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+D. <img src="https://pixnio.com/free-images/2019/12/12/2019-12-12-10-59-22-1200x800.jpg" alt="orange image" width="3%"/>&nbsp;&nbsp;
+<INPUT TYPE="radio" NAME="orange"/> 
+<br>
+<br>
+<a href="file:///C:/Users/sywki/OneDrive/%EB%B0%94%ED%83%95%20%ED%99%94%EB%A9%B4/Index%20Page.html">back</a>
+</body>
+</html>

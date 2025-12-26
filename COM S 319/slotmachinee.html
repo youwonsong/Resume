@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--
+Author: Joshua Lawrinenko
+Date: 11/4/2021
+File: home.html
+-->
+
+<head>
+	<!-- Required Meta Tags -->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Reset CSS -->
+	<link rel="stylesheet" href="styles/reset.css">
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+	<!-- Custom CSS -->
+	<link rel="stylesheet" href="styles/slots.css">
+	<!-- Bootstrap JS -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"
+		async defer></script>
+	<title>Slot Machine</title>
+</head>
+
+<body>
+
+	<nav class="navbar navbar-expand-md navbar-dark" style="background-color: rgb(75, 75, 75);">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="slots.html">Slots</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+				aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<div class="navbar-nav">
+					<a class="nav-link" href="home.html">Home</a>
+					<a class="nav-link" href="#">Account</a>
+					<a class="nav-link" href="settings.html">Settings</a>
+				</div>
+			</div>
+		</div>
+	</nav>
+<div id="app">
+  <div class="doors">
+    <div class="door">
+      <div class="boxes">
+        <!-- <div class="box">?</div> -->
+      </div>
+    </div>
+
+    <div class="door">
+      <div class="boxes">
+        <!-- <div class="box">?</div> -->
+      </div>
+    </div>
+
+    <div class="door">
+      <div class="boxes">
+        <!-- <div class="box">?</div> -->
+      </div>
+    </div>
+  </div>
+
+  <div class="buttons">
+    <button id="spinner">Spin</button>
+    <button id="reseter">Reset</button>
+  </div>
+
+  <p class="info"></p>
+<style>
+html,
+body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  border: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  -webkit-box-sizing: inherit;
+  -moz-box-sizing: inherit;
+  box-sizing: inherit;
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+
+  background: #212121;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.doors {
+  display: flex;
+}
+
+.door {
+  background: #fafafa;
+  box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.4) inset;
+
+  width: 100px;
+  height: 150px;
+  overflow: hidden;
+
+  border-radius: 1ex;
+  margin: 1ch;
+}
+
+.boxes {
+  /* transform: translateY(0); */
+  transition: transform 1s ease-in-out;
+}
+
+.box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 3rem;
+}
+
+.buttons {
+  margin: 1rem 0 2rem 0;
+}
+
+button {
+  cursor: pointer;
+
+  font-size: 1.2rem;
+  text-transform: uppercase;
+
+  margin: 0 0.2rem 0 0.2rem;
+}
+
+.info {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
+
+</style>
+<script>
+(function () {
+  "use strict";
+
+  const items = [
+    "❌",
+    "⛄️",
+    "🦄",
+    "🍌",
+    "🍎"
+  ];
+  document.querySelector(".info").textContent = items.join(" ");
+
+  const doors = document.querySelectorAll(".door");
+  document.querySelector("#spinner").addEventListener("click", spin);
+  document.querySelector("#reseter").addEventListener("click", init);
+
+  async function spin() {
+    init(false, 1, 2);
+    for (const door of doors) {
+      const boxes = door.querySelector(".boxes");
+      const duration = parseInt(boxes.style.transitionDuration);
+      boxes.style.transform = "translateY(0)";
+      await new Promise((resolve) => setTimeout(resolve, duration * 100));
+    }
+  }
+
+  function init(firstInit = true, groups = 1, duration = 1) {
+    for (const door of doors) {
+      if (firstInit) {
+        door.dataset.spinned = "0";
+      } else if (door.dataset.spinned === "1") {
+        return;
+      }
+
+      const boxes = door.querySelector(".boxes");
+      const boxesClone = boxes.cloneNode(false);
+
+      const pool = ["❓"];
+      if (!firstInit) {
+        const arr = [];
+        for (let n = 0; n < (groups > 0 ? groups : 1); n++) {
+          arr.push(...items);
+        }
+        pool.push(...shuffle(arr));
+
+        boxesClone.addEventListener(
+          "transitionstart",
+          function () {
+            door.dataset.spinned = "1";
+            this.querySelectorAll(".box").forEach((box) => {
+              box.style.filter = "blur(1px)";
+            });
+          },
+          { once: true }
+        );
+
+        boxesClone.addEventListener(
+          "transitionend",
+          function () {
+            this.querySelectorAll(".box").forEach((box, index) => {
+              box.style.filter = "blur(0)";
+              if (index > 0) this.removeChild(box);
+            });
+          },
+          { once: true }
+        );
+      }
+      // console.log(pool);
+
+      for (let i = pool.length - 1; i >= 0; i--) {
+        const box = document.createElement("div");
+        box.classList.add("box");
+        box.style.width = door.clientWidth + "px";
+        box.style.height = door.clientHeight + "px";
+        box.textContent = pool[i];
+        boxesClone.appendChild(box);
+      }
+      boxesClone.style.transitionDuration = `${duration > 0 ? duration : 1}s`;
+      boxesClone.style.transform = `translateY(-${
+        door.clientHeight * (pool.length - 1)
+      }px)`;
+      door.replaceChild(boxesClone, boxes);
+      // console.log(door);
+    }
+  }
+
+  function shuffle([...arr]) {
+    let m = arr.length;
+    while (m) {
+      const i = Math.floor(Math.random() * m--);
+      [arr[m], arr[i]] = [arr[i], arr[m]];
+    }
+    return arr;
+  }
+
+  init();
+})();
+
+</script>
+</div>
+
+</body>
+
+</html>

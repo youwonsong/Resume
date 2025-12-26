@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <title>Validation Form</title>
+
+    <meta charset="UTF-8">
+
+    <script src="​validation1.js"></script>
+
+</head>
+
+<body>
+
+    <form id='myForm' action="validation2.html">
+
+        <label for="fname">First name:</label>
+
+        <input type="text" id="fname" name="fname" required>
+
+        <img id='fnameResult'><br>
+
+        <label for="lname">Last name:</label>
+
+        <input type="text" id="lname" name="lname" required>
+
+        <img id='lnameResult'><br>
+
+        <label for="gender">Gender:</label>
+
+        <select id="gender" name="gender">
+
+            <option value="select">Select</option>
+
+            <option value="Male">Male</option>
+
+            <option value="Female">Female</option>
+
+        </select>
+
+        <img id='genderResult'><br>
+
+        <label for="state">State:</label>
+
+        <select name="state" id="state">
+
+            <option value="select">Select</option>
+
+            <option value="California">California</option>
+
+            <option value="Florida">Florida</option>
+
+            <option value="New York">New York</option>
+
+            <option value="Texas">Texas</option>
+
+            <option value="Hawaii">Hawaii</option>
+
+            <option value="Washington">Washington</option>
+
+            <option value="Colorado">Colorado</option>
+
+            <option value="Virginia">Virginia</option>
+
+            <option value="Iowa">Iowa</option>
+
+            <option value="Arizona">Arizona</option>
+
+        </select>
+
+        <img id='stateResult'><br><br>
+
+        <input type="button" value="Continue" onclick="validate()">
+
+  
+
+
+
+
+<script>
+
+function validate(){
+
+    var status = true;
+
+    //fisrt name 
+
+    if((document.getElementById('fname').value).match(/^[A-Za-z0-9]+$/)){
+
+        document.getElementById('fnameResult').src = 'correct.png'
+
+    }else{
+
+        document.getElementById('fnameResult').src = 'wrong.png'
+		alert('Must contain onlyalphabetic or numeric characters.')
+
+        status = false;
+
+    }
+
+    //last name 
+
+    if((document.getElementById('lname').value).match(/^[A-Za-z0-9]+$/)){
+
+        document.getElementById('lnameResult').src = 'correct.png'
+
+    }else{
+
+        document.getElementById('lnameResult').src = 'wrong.png'
+		alert('Must contain onlyalphabetic or numeric characters.')
+
+        status = false;
+
+    }
+
+    //gender
+
+    if((document.getElementById('gender').value) != "select" ){
+
+        document.getElementById('genderResult').src = 'correct.png'
+
+    }else{
+
+        document.getElementById('genderResult').src = 'wrong.png'
+
+        status = false;
+
+    }
+
+    //state 
+
+    if((document.getElementById('state').value) != "select" ){
+
+        document.getElementById('stateResult').src = 'correct.png'
+
+    }else{
+
+        document.getElementById('stateResult').src = 'wrong.png'
+		alert('Select from given list.')
+
+        status = false;
+
+    }
+
+    //success
+
+    if(status){
+
+
+        alert('Success.');
+
+        document.getElementById("myForm").submit();
+		documnet.location.href=validation2.html
+    }
+
+}
+</script>
+</form>
+
+</body>
+
+</html>

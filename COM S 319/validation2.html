@@ -1,0 +1,94 @@
+<html>
+
+<head>
+<script src="validation2.js"></script>
+<title>Contact information</title>
+</head>
+<table border=1>
+	<tr>
+		<th>FIELD LABEL</th>
+		<th>Field Type</th>
+		<th>Validation Rule</th>
+		<th>RESULT</th>
+	</tr>
+	<tr>
+		<td>Email</td>
+		<td><input type="text" id="email" required></td>
+		<td>*<b>Required</b><br>Must be in the form<br>
+			xxx@xxx.xxx <br>x should be alphanumeric<br>(eg. no special
+			symbols).
+		</td>
+		<td>
+			<div id="image"></div>
+		</td>
+	</tr>
+	<tr>
+		<td>Phone</td>
+		<td><input type="text" id="phone" required></td>
+		<td>*<b>Required</b><br>Must be in the form<br>
+			xxx-xxx-xxxx or xxxxxxxxxx <br> x should be numeric.
+		</td>
+		<td>
+			<div id="image2"></div>
+		</td>
+	</tr>
+	<tr>
+		<td>Address</td>
+		<td><input type="text" id="address" required></td>
+		<td>*<b>Required</b><br>Must be in the form<br>
+			city,state <br> example:Ames,IA.
+		</td>
+		<td>
+			<div id="image3"></div>
+		</td>
+	</tr>
+	<tr>
+		<td><button onclick="valid()">Submit</button></td>
+	</tr>
+    <script>
+    function valid()
+{
+   //access all values in the input field
+        var email=document.getElementById("email").value;
+        //alert(email);
+        var phone=document.getElementById("phone").value;
+        var address=document.getElementById("address").value;
+        //alert(address);
+        //regular expression for email
+       if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))
+       {
+             document.getElementById("image").innerHTML = "<img src=\"correct.png\" height=\"50\" width=\"50\"/>"
+       }
+       else
+       {
+             document.getElementById("image").innerHTML = "<img src=\"wrong.png\" height=\"50\" width=\"50\"/>"
+             alert('Must be in the formxxx@xxx.xxxx should be alphanumeric (e.g. nospecial symbols).');
+       }
+
+//regular expression for phone number
+      var phoneno =/^\(?([0-9]{3})\)?[- ]?([0-9]{3})[- ]?([0-9]{4})$/;  
+      if(phone.match(phoneno))
+      {
+             document.getElementById("image2").innerHTML = "<img src=\"correct.png\" height=\"50\" width=\"50\"/>"
+      }
+      else
+      {
+                document.getElementById("image2").innerHTML = "<img src=\"wrong.png\" height=\"50\" width=\"50\"/>"
+                alert('Must be in the formxxx-xxx-xxxx orxxxxxxxxxx.x should be numeric');
+       }
+//regx for address
+      if(/^\w+(,\w+)*$/.test(address))
+      {
+         document.getElementById("image3").innerHTML ="<img src=\"correct.png\" height=\"50\" width=\"50\"/>"
+       }
+       else
+        {
+                document.getElementById("image3").innerHTML = "<img src=\"wrong.png\" height=\"50\" width=\"50\"/>"
+                alert('Must be in the form of city & state.example:Ames,IA');
+        }
+        
+}
+    </script>
+</table>
+
+</html>
